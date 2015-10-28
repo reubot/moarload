@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 
-#define BOOST_NETWORK_NO_LIB
+//#define BOOST_NETWORK_NO_LIB
 #if defined(_WIN32)
 #define __func__ __FUNCTION__
 #include <boost/optional.hpp>

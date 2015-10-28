@@ -50,12 +50,17 @@ if(Boost_FOUND)
 endif()
 
 # cpp-netlib
-if(UNIX)
-    include_directories("/usr/local/include/cpp-netlib")
-endif(UNIX)
-if(WIN32)
-    include_directories("C:/dev/libs/cpp-netlib-0.9.2")
-endif(WIN32)
+
+find_package(cppnetlib REQUIRED)
+include_directories ( ${cppnetlib_INCLUDE_DIRS} )
+
+MESSAGE(STATUS "CPPNETLIB_LIBRARIES:  " ${CPPNETLIB_LIBRARIES} ) 
+# if(UNIX)
+#     include_directories("/usr/local/include/cpp-netlib")
+# endif(UNIX)
+# if(WIN32)
+#     include_directories("C:/dev/libs/cpp-netlib-0.9.2")
+# endif(WIN32)
 
 # thrift
 if(UNIX)
@@ -91,4 +96,8 @@ target_link_libraries(moarload
 #    ${thrift_LIBRARIES}
 	${thift_LDFLAGS}
     ${wxWidgets_LIBRARIES}
+#     ${CPPNETLIB_LIBRARIES}
+"-lcppnetlib-client-connections"
+"-lcppnetlib-server-parsers"
+"-lcppnetlib-uri"
 )
