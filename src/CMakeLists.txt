@@ -59,8 +59,12 @@ endif(WIN32)
 
 # thrift
 if(UNIX)
-    include_directories("/usr/local/include/thrift")
-    set(thrift_LIBRARIES /usr/local/lib/libthrift.a)
+INCLUDE(FindPkgConfig)
+pkg_check_modules(thift REQUIRED thrift)
+MESSAGE(STATUS "THRIFT:  " ${thrift_INCLUDE_DIRS} ) 
+MESSAGE(STATUS "THRIFT Libs:  " ${thift_LDFLAGS} ) 
+     include_directories("/usr/include/thrift")
+#     set(thrift_LIBRARIES /usr/local/lib/libthrift.a)
 endif(UNIX)
 if(WIN32)
     include_directories("C:/dev/libs/thrift-trunk/lib/cpp/src")
@@ -84,6 +88,7 @@ endif(WIN32)
 # link
 target_link_libraries(moarload
     ${Boost_LIBRARIES}
-    ${thrift_LIBRARIES}
+#    ${thrift_LIBRARIES}
+	${thift_LDFLAGS}
     ${wxWidgets_LIBRARIES}
 )
